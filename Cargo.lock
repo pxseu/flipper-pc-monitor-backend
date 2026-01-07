@@ -310,7 +310,6 @@ dependencies = [
  "futures",
  "pretty_env_logger",
  "serde",
- "serde_json",
  "sysinfo",
  "tokio",
  "uuid",

@@ -150,14 +150,6 @@ impl GpuInfo {
             vram_used,
         })
     }
-
-    fn parse_ioreg_number(line: &str, key: &str, offset: usize) -> Option<u64> {
-        line.find(key).and_then(|start| {
-            let after_equals = &line[start + offset..];
-            let end = after_equals.find(|c: char| !c.is_ascii_digit())?;
-            after_equals[..end].parse::<u64>().ok()
-        })
-    }
 }
 
 #[cfg(target_os = "macos")]
@@ -288,6 +280,14 @@ impl GpuInfo {
             gpu_usage: 0,
             vram_max,
             vram_used: 0,
+        })
+    }
+
+    fn parse_ioreg_number(line: &str, key: &str, offset: usize) -> Option<u64> {
+        line.find(key).and_then(|start| {
+            let after_equals = &line[start + offset..];
+            let end = after_equals.find(|c: char| !c.is_ascii_digit())?;
+            after_equals[..end].parse::<u64>().ok()
         })
     }
 }
